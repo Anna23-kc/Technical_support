@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Edited with Oxygen XML editor (http://www.oxygenxml.com) by HMS Industrial Networks -->
+<ISO15745Profile xmlns="http://www.profibus.com/GSDML/2003/11/DeviceProfile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.profibus.com/GSDML/2003/11/DeviceProfile ..\XSD\GSDML-DeviceProfile-v2.25.xsd">
+	<ProfileHeader>
+		<ProfileIdentification>PROFINET Device Profile</ProfileIdentification>
+		<ProfileRevision>1.00</ProfileRevision>
+		<ProfileName>Device Profile for PROFINET Devices</ProfileName>
+		<ProfileSource>PROFIBUS Nutzerorganisation e. V. (PNO)</ProfileSource>
+		<ProfileClassID>Device</ProfileClassID>
+		<ISO15745Reference>
+			<ISO15745Part>4</ISO15745Part>
+			<ISO15745Edition>1</ISO15745Edition>
+			<ProfileTechnology>GSDML</ProfileTechnology>
+		</ISO15745Reference>
+	</ProfileHeader>
+	<ProfileBody>
+		<DeviceIdentity VendorID="0x01E2" DeviceID="0x0102">
+			<InfoText TextId="T_ID_DEV_DESCRIPTION"/>
+			<VendorName Value="Kaeser Kompressoren GmbH"/>
+		</DeviceIdentity>
+		<DeviceFunction>
+			<Family MainFamily="General" ProductFamily="Kaeser(SIGMA CONTROL 2) 2-Port"/>
+		</DeviceFunction>
+		<ApplicationProcess>
+
+<!-- ============================================================================================ -->
+<!--   List of Device Access Points (DAP)                 									                      -->
+<!-- ============================================================================================ -->
+			<DeviceAccessPointList>
+				<DeviceAccessPointItem ID="DAP V1.0" PhysicalSlots="0..2" ModuleIdentNumber="0x00000001" MinDeviceInterval="64" ImplementationType="NP30" DNS_CompatibleName="Kaeser-SC2-2-Port" ExtendedAddressAssignmentSupported="true" FixedInSlots="0" ObjectUUID_LocalIndex="1" DeviceAccessSupported="true">
+					<ModuleInfo CategoryRef="CAT_REF_MIGRATION_DAP">
+						<Name TextId="T_ID_DAP_V1"/>
+						<InfoText TextId="T_ID_V1_DEV_DESCRIPTION"/>
+						<VendorName Value="Kaeser Kompressoren GmbH"/>
+						<OrderNumber Value="7.7606.x0030"/>
+						<HardwareRelease Value="V2"/>
+						<SoftwareRelease Value="V1.24.1"/>
+					</ModuleInfo>
+					<IOConfigData MaxInputLength="131" MaxOutputLength="67"/>
+					<UseableModules>
+					<!--References to the ModuleList-->
+						<ModuleItemRef ModuleItemTarget="ID_MODULE_OUTPUT64B" FixedInSlots="2"/>
+						<ModuleItemRef ModuleItemTarget="ID_MODULE_INPUT128B" FixedInSlots="1"/>
+                  			</UseableModules>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="DAP V1.0" SubmoduleIdentNumber="0x00000000" API="0">
+							<IOData IOPS_Length="1" IOCS_Length="1" />
+							<RecordDataList/>
+							<ModuleInfo>
+								<Name TextId="T_ID_DAP_V1"/>
+								<InfoText TextId="T_ID_V1_DEV_DESCRIPTION"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+<!-- edited by BEG: start -->
+<Graphics>
+<GraphicItemRef Type="DeviceSymbol" GraphicItemTarget="1" />
+</Graphics>
+<!-- edited by BEG: end -->
+				</DeviceAccessPointItem>
+
+				<DeviceAccessPointItem ID="DAP V2.0" PhysicalSlots="0..2" ModuleIdentNumber="0x00000011" MinDeviceInterval="64" ImplementationType="NP30" DNS_CompatibleName="Kaeser-SC2-2-Port" ExtendedAddressAssignmentSupported="true" FixedInSlots="0" ObjectUUID_LocalIndex="1" DeviceAccessSupported="true" RequiredSchemaVersion="V2.25" ParameterizationSpeedupSupported="true">
+					<ModuleInfo>
+						<Name TextId="T_ID_DAP_V2"/>
+						<InfoText TextId="T_ID_V2_DEV_DESCRIPTION"/>
+						<VendorName Value="Kaeser Kompressoren GmbH"/>
+						<OrderNumber Value="7.7606.x0030"/>
+						<HardwareRelease Value="V2"/>
+						<SoftwareRelease Value="V1.24.1"/>
+					</ModuleInfo>
+
+					<SubslotList>
+						<SubslotItem SubslotNumber="32768" TextId="T_ID_SS_INTERFACE"/>
+						<SubslotItem SubslotNumber="32769" TextId="T_ID_SS_PORT1"/>
+						<SubslotItem SubslotNumber="32770" TextId="T_ID_SS_PORT2"/>
+					</SubslotList>
+
+					<IOConfigData MaxInputLength="134" MaxOutputLength="70"/>
+
+					<UseableModules>
+						<ModuleItemRef ModuleItemTarget="ID_MODULE_OUTPUT64B" FixedInSlots="2"/>
+						<ModuleItemRef ModuleItemTarget="ID_MODULE_INPUT128B" FixedInSlots="1"/>
+					</UseableModules>
+
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="DAP V2.0" SubmoduleIdentNumber="0x00000001" API="0">
+							<IOData IOPS_Length="1" IOCS_Length="1" />
+							<RecordDataList/>
+							<ModuleInfo>
+								<Name TextId="T_ID_DAP_V2"/>
+								<InfoText TextId="T_ID_V2_DEV_DESCRIPTION"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+
+          <SystemDefinedSubmoduleList>
+						<InterfaceSubmoduleItem ID="Interface" SubslotNumber="32768" SubmoduleIdentNumber="0x0002" SupportedRT_Classes="RT_CLASS_1" TextId="T_ID_DAP_INTERFACE_MODULE" DCP_HelloSupported="false" IsochroneModeSupported="false" SupportedMibs="MIB2" SupportedProtocols="SNMP;LLDP">
+							<ApplicationRelations NumberOfAdditionalInputCR="0" NumberOfAdditionalMulticastProviderCR="0" NumberOfAdditionalOutputCR="0" NumberOfMulticastConsumerCR="0" PullModuleAlarmSupported="false">
+								<TimingProperties SendClock="32 64 128" ReductionRatio="1 2 4 8 16 32 64 128 256 512"/>
+							</ApplicationRelations>
+						</InterfaceSubmoduleItem>
+						<PortSubmoduleItem ID="Port 1" SubslotNumber="32769" SubmoduleIdentNumber="0x0003" MAUType="100BASETXFD" TextId="T_ID_PORT"/>
+						<PortSubmoduleItem ID="Port 2" SubslotNumber="32770" SubmoduleIdentNumber="0x0004" MAUType="100BASETXFD" TextId="T_ID_PORT2"/>
+					</SystemDefinedSubmoduleList>
+<!-- edited by BEG: start -->
+<Graphics>
+<GraphicItemRef Type="DeviceSymbol" GraphicItemTarget="1" />
+</Graphics>
+<!-- edited by BEG: end -->
+				</DeviceAccessPointItem>
+
+			</DeviceAccessPointList>
+
+<!-- List of modules -->
+
+      <ModuleList>
+				<!--* Output 64 byte *-->
+				<ModuleItem ID="ID_MODULE_OUTPUT64B" ModuleIdentNumber="0x00000020">
+					<ModuleInfo CategoryRef="CAT_REF_MODULES">
+						<Name TextId="T_ID_MODULE_NAME_OUTPUT64B"/>
+						<InfoText TextId="T_ID_INFO_TEXT_OUTPUT64B"/>
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_OUTPUT64B" SubmoduleIdentNumber="0x00000000" API="0" FixedInSubslots="1">
+							<IOData IOPS_Length="1" IOCS_Length="1">
+								<Output Consistency="All items consistency">
+									<DataItem DataType="OctetString" Length="64" TextId="T_ID_OUTPUT"/>
+								</Output>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_SUBMOD_NAME_OUTPUT64B"/>
+								<InfoText TextId="T_ID_SUBMOD_INFO_OUTPUT64B"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+				<!--* Input 128 byte *-->
+				<ModuleItem ID="ID_MODULE_INPUT128B" ModuleIdentNumber="0x00000002">
+					<ModuleInfo CategoryRef="CAT_REF_MODULES">
+						<Name TextId="T_ID_MODULE_NAME_INPUT128B"/>
+						<InfoText TextId="T_ID_INFO_TEXT_INPUT128B"/>
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_INPUT128B" SubmoduleIdentNumber="0x00000000" API="0" FixedInSubslots="1">
+							<IOData IOPS_Length="1" IOCS_Length="1">
+								<Input Consistency="All items consistency">
+									<DataItem DataType="OctetString" Length="128" TextId="T_ID_INPUT"/>
+								</Input>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_SUBMOD_NAME_INPUT128B"/>
+								<InfoText TextId="T_ID_SUBMOD_INFO_INPUT128B"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+			</ModuleList>
+
+<!-- List of values -->
+<!-- edited by BEG: start -->
+<GraphicsList>
+<GraphicItem ID="1" GraphicFile="GSDML-01E2-0102-SC2"></GraphicItem>
+</GraphicsList>
+<!-- edited by BEG: end -->
+
+<!-- List of categorys -->
+			<CategoryList>
+				<CategoryItem ID="CAT_REF_MODULES" TextId="T_ID_CAT_REF_MODULES"/>
+				<CategoryItem ID="CAT_REF_MIGRATION_DAP" TextId="T_ID_MIGRATION_DAP"/>
+			</CategoryList>
+
+<!-- List of texts -->
+			<ExternalTextList>
+				<PrimaryLanguage>
+					<!--Device Access Point information etc -->
+					<Text TextId="T_ID_DEV_DESCRIPTION" Value="Anybus CompactCom PROFINET IO 2-Port"/>
+					<Text TextId="T_ID_V1_DEV_DESCRIPTION" Value="This Device Access Point may be used by IO Controllers that do not support extended PROFINET diagnostics. RT communication is supported"/>
+					<Text TextId="T_ID_V2_DEV_DESCRIPTION" Value="This Device Access Point supports RT communication"/>
+          			<Text TextId="T_ID_DAP_V1" Value="RT(Migration)"/>
+          			<Text TextId="T_ID_DAP_V2" Value="RT"/>
+					<Text TextId="T_ID_SS_INTERFACE" Value="X1"/>
+					<Text TextId="T_ID_SS_PORT1" Value="P1"/>
+					<Text TextId="T_ID_SS_PORT2" Value="P2"/>
+					<Text TextId="T_ID_DAP_INTERFACE_MODULE" Value="Interface"/>
+					<Text TextId="T_ID_PORT" Value="Port 1"/>
+					<Text TextId="T_ID_PORT2" Value="Port 2"/>
+
+					<!--Module category-->
+					<Text TextId="T_ID_CAT_REF_MODULES" Value="Input/Output"/>
+					<Text TextId="T_ID_MIGRATION_DAP" Value="Migration" />
+
+					<!-- Vendor module texts -->
+					<Text TextId="T_ID_INPUT" Value="Input"/>
+					<Text TextId="T_ID_OUTPUT" Value="Output"/>
+
+					<Text TextId="T_ID_MODULE_NAME_OUTPUT64B" Value="Output 64 byte"/>
+					<Text TextId="T_ID_INFO_TEXT_OUTPUT64B" Value="Output 64 byte"/>
+					<Text TextId="T_ID_SUBMOD_NAME_OUTPUT64B" Value="Output 64 byte"/>
+					<Text TextId="T_ID_SUBMOD_INFO_OUTPUT64B" Value="Output 64 byte"/>
+					<Text TextId="T_ID_MODULE_NAME_INPUT128B" Value="Input 128 byte"/>
+					<Text TextId="T_ID_INFO_TEXT_INPUT128B" Value="Input 128 byte"/>
+					<Text TextId="T_ID_SUBMOD_NAME_INPUT128B" Value="Input 128 byte"/>
+					<Text TextId="T_ID_SUBMOD_INFO_INPUT128B" Value="Input 128 byte"/>
+
+
+				</PrimaryLanguage>
+				<Language xml:lang="en">
+					<!--Device Access Point information etc -->
+					<Text TextId="T_ID_DEV_DESCRIPTION" Value="Kaeser(SIGMA CONTROL 2) 2-Port"/>
+					<Text TextId="T_ID_V1_DEV_DESCRIPTION" Value="This Device Access Point may be used by IO Controllers that do not support extended PROFINET diagnostics. RT communication is supported"/>
+					<Text TextId="T_ID_V2_DEV_DESCRIPTION" Value="This Device Access Point supports RT communication"/>
+					<Text TextId="T_ID_DAP_V1" Value="RT(Migration)"/>
+					<Text TextId="T_ID_DAP_V2" Value="RT"/>
+					<Text TextId="T_ID_SS_INTERFACE" Value="X1"/>
+					<Text TextId="T_ID_SS_PORT1" Value="P1"/>
+					<Text TextId="T_ID_SS_PORT2" Value="P2"/>
+					<Text TextId="T_ID_DAP_INTERFACE_MODULE" Value="Interface"/>
+					<Text TextId="T_ID_PORT" Value="Port 1"/>
+					<Text TextId="T_ID_PORT2" Value="Port 2"/>
+
+					<!--Module category-->
+					<Text TextId="T_ID_CAT_REF_MODULES" Value="Input/Output"/>
+					<Text TextId="T_ID_MIGRATION_DAP" Value="Migration" />
+
+					<!-- Vendor module texts -->
+					<Text TextId="T_ID_INPUT" Value="Input"/>
+					<Text TextId="T_ID_OUTPUT" Value="Output"/>
+
+					<Text TextId="T_ID_MODULE_NAME_OUTPUT64B" Value="Output 64 byte"/>
+					<Text TextId="T_ID_INFO_TEXT_OUTPUT64B" Value="Output 64 byte"/>
+					<Text TextId="T_ID_SUBMOD_NAME_OUTPUT64B" Value="Output 64 byte"/>
+					<Text TextId="T_ID_SUBMOD_INFO_OUTPUT64B" Value="Output 64 byte"/>
+					<Text TextId="T_ID_MODULE_NAME_INPUT128B" Value="Input 128 byte"/>
+					<Text TextId="T_ID_INFO_TEXT_INPUT128B" Value="Input 128 byte"/>
+					<Text TextId="T_ID_SUBMOD_NAME_INPUT128B" Value="Input 128 byte"/>
+					<Text TextId="T_ID_SUBMOD_INFO_INPUT128B" Value="Input 128 byte"/>
+
+				</Language>
+			</ExternalTextList>
+		</ApplicationProcess>
+	</ProfileBody>
+</ISO15745Profile>

@@ -1,0 +1,76 @@
+;==========================================================
+; GSD-File KAESER SIGMA CONTROL 2
+; Model    : SIGMA CONTROL 2 DP-V0
+; Date     : 12.08.2010
+; Revision : V1.00
+; Filename : KAES0CEC.GSD
+;==========================================================
+#Profibus_DP
+GSD_Revision        = 3
+Vendor_Name         = "KAESER KOMPRESSOREN GmbH"
+Model_Name          = "SIGMA CONTROL 2"
+Revision            = "V1.00"
+Ident_Number        = 0x0CEC
+Protocol_Ident      = 0
+Station_Type        = 0
+FMS_supp            = 0
+Hardware_Release    = "Version 1.00"
+Software_Release    = "Version 1.00"
+;
+; Supported baudrates
+9.6_supp            = 1
+19.2_supp           = 1
+45.45_supp          = 1
+93.75_supp          = 1
+187.5_supp          = 1
+500_supp            = 1
+1.5M_supp           = 1
+3M_supp             = 1
+6M_supp             = 1
+12M_supp            = 1
+;
+; Maximum responder time for supported baudrates
+MaxTsdr_9.6         = 15
+MaxTsdr_19.2        = 15
+MaxTsdr_45.45       = 15
+MaxTsdr_93.75       = 15
+MaxTsdr_187.5       = 15
+MaxTsdr_500         = 15
+MaxTsdr_1.5M        = 25
+MaxTsdr_3M          = 50
+MaxTsdr_6M          = 100
+MaxTsdr_12M         = 200
+;
+; Supported hardware features
+Redundancy          = 0
+Repeater_Ctrl_Sig   = 2
+24V_Pins            = 0
+Implementation_Type = "NP30"
+Bitmap_Device       = "SC2"
+;
+; slave dependent key words
+;
+; Supported DP features
+Freeze_Mode_supp    = 1
+Sync_Mode_supp      = 1
+Auto_Baud_supp      = 1
+Set_Slave_Add_supp  = 1
+;
+User_Prm_Data_Len   = 0
+Max_Diag_Data_Len   = 31
+Min_Slave_Intervall = 6
+Slave_Family        = 0
+;
+; DPV1 related keywords
+DPV1_Slave 	    = 0
+;
+; I/O related keywords
+Modular_Station     = 0			
+;
+;Modul-Definitions:
+Info_Text           = "GSD Revision: 3, PROFIBUS DPV0, Input: 128 Byte, Output: 64 Byte, PN: 7.7606.x0040"
+Module              = "KAESER SIGMA CONTROL 2 DP-V0" 0xC0,0x5F,0x7F
+1
+EndModule
+
+

@@ -1,0 +1,301 @@
+/* --- CONFIGURATION GLOBALE --- */
+body { 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  margin: 0; 
+  background: #fdfdfb; 
+  -webkit-user-select: none; 
+  user-select: none; 
+}
+
+/* Ligne jaune signature Kaeser en haut de page */
+.top-yellow-line { 
+  background: #ffcc00; 
+  height: 18px; 
+  width: 100%; 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  z-index: 100; 
+}
+
+/* --- HUB D'ACCUEIL (4 CASES SUR UNE LIGNE) --- */
+.hub-grid { 
+  display: grid; 
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 20px; 
+  max-width: 1200px; 
+  margin: 50px auto; 
+  padding: 20px;
+}
+
+.hub-card { 
+  background: white; 
+  padding: 30px 15px; 
+  border-radius: 20px; 
+  text-align: center; 
+  cursor: pointer; 
+  transition: 0.3s ease; 
+  border: 2px solid #eee; 
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+}
+
+.hub-card:hover { 
+  transform: translateY(-10px); 
+  border-color: #ffcc00; 
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1); 
+}
+
+.hub-card img {
+  width: 80px;
+  height: auto;
+  margin-bottom: 20px;
+  object-fit: contain;
+}
+
+.hub-icon { 
+  font-size: 50px; 
+  color: #ffcc00; 
+  margin-bottom: 20px; 
+}
+
+.hub-card h3 { 
+  color: #001e3e; 
+  margin: 10px 0; 
+  font-weight: 800; 
+  font-size: 16px; 
+  text-transform: uppercase;
+}
+
+.hub-card p { 
+  color: #666; 
+  font-size: 13px; 
+  margin: 0;
+}
+
+/* --- ÉCRAN DE CONNEXION --- */
+.login-screen { 
+  background: #2d3436; 
+  height: 100vh; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  position: relative; 
+}
+.login-card { 
+  background: white; 
+  padding: 40px; 
+  border-radius: 12px; 
+  text-align: center; 
+  width: 350px; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+}
+.login-form { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 15px; 
+  margin-top: 25px; 
+}
+.login-card input { 
+  padding: 12px; 
+  border: 1px solid #ddd; 
+  border-radius: 6px; 
+  outline: none; 
+  width: 100%; 
+  box-sizing: border-box;
+}
+.login-card button { 
+  padding: 12px; 
+  background: #ffcc00; 
+  color: #001e3e; 
+  border: none; 
+  border-radius: 6px; 
+  cursor: pointer; 
+  font-weight: bold; 
+}
+
+/* --- NAVIGATION --- */
+.main-nav { 
+  background: #ffffff; 
+  position: relative; 
+  border-bottom: 1px solid #eee; 
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.nav-container { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 10px 40px; 
+}
+.nav-logo-img {
+  height: 85px; 
+  width: auto;
+  display: block;
+}
+.btn-nav { 
+  color: #000000; 
+  background: none; 
+  border: none; 
+  padding: 8px 15px; 
+  border-radius: 6px; 
+  font-size: 14px; 
+  font-weight: bold; 
+  cursor: pointer; 
+}
+.btn-nav.active { color: #001e3e; }
+
+/* --- BANDEAU HERO --- */
+.hero { 
+  background: #7f8c8d; 
+  padding: 20px; 
+  text-align: center; 
+  color: white; 
+}
+.hero h1 { font-size: 2.5rem; margin: 0; font-weight: bold; }
+.hero-subtitle { font-style: italic; opacity: 0.9; margin-top: 5px; }
+.hero-top-icons img { width: 220px; height: auto; mix-blend-mode: lighten; }
+
+/* --- BARRE DE RECHERCHE STRICTEMENT D'ORIGINE (PAS TOUCHÉE) --- */
+.search-bar-modern { 
+  background: white; 
+  max-width: 700px; 
+  margin: 20px auto; 
+  border-radius: 12px; 
+  display: flex; 
+  align-items: center; 
+  padding: 6px; 
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
+}
+.search-bar-modern input { 
+  border: none; 
+  flex: 1; 
+  padding: 12px 20px; 
+  outline: none; 
+  font-size: 15px; 
+}
+
+/* --- RETOUR PROPULSÉ SUR LA MÊME LIGNE QUE RECHERCHER (CÔTÉ DROIT) --- */
+#back-button-container {
+  position: absolute;
+  right: 40px;
+  /* On applique une valeur négative forte pour le forcer à remonter pile en face de la recherche */
+  margin-top: -68px; 
+  z-index: 999;
+}
+
+.btn-back { 
+  background: #001e3e; 
+  color: white; 
+  border: none; 
+  height: 45px; 
+  padding: 0 25px; 
+  border-radius: 12px; 
+  cursor: pointer; 
+  font-weight: bold; 
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* --- GRILLE PRODUITS (FORMAT COMPACT & IMAGE GRANDIE) --- */
+.main-container { 
+  padding: 15px; 
+  max-width: 1400px; 
+  margin: auto; 
+  text-align: center; 
+}
+
+.grille-produits { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+  gap: 15px; 
+  justify-items: center;
+}
+
+.card-produit { 
+  background: white; 
+  padding: 10px; 
+  border-radius: 12px; 
+  width: 220px;  
+  height: auto;  
+  min-height: 200px; 
+  cursor: pointer; 
+  box-shadow: 0 6px 12px rgba(0,0,0,0.05); 
+  transition: 0.3s ease; 
+  border: 1px solid #eee; 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.card-produit:hover { 
+  transform: translateY(-3px); 
+  border-color: #ffcc00; 
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+}
+
+.card-produit img { 
+  max-width: 190px; 
+  max-height: 150px; 
+  width: 90%; 
+  object-fit: contain; 
+  margin-top: 5px; 
+  margin-bottom: 8px; 
+}
+
+.card-produit h3 { 
+  font-size: 14px; 
+  font-weight: 800; 
+  color: #001e3e; 
+  margin: 0; 
+  padding: 0 5px;
+  width: 100%; 
+  text-align: center;
+  line-height: 1.1;
+}
+
+/* --- LISTES ET LIGNES --- */
+.liste-verticale { max-width: 900px; margin: auto; text-align: left; }
+.file-row, .choice-row { 
+  background: white; padding: 15px; border-radius: 15px; display: flex; 
+  justify-content: space-between; align-items: center; border-left: 6px solid #ffcc00; 
+  margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+}
+.choice-row { cursor: pointer; font-weight: bold; }
+.choice-row:hover { background: #fff9e6; }
+
+.btn-open { background: #ffcc00; border: 2px solid #000; padding: 6px 15px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+
+/* --- MODALS --- */
+.modal-overlay { 
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+  background: rgba(0,0,0,0.85); z-index: 20000; 
+  display: flex; justify-content: center; align-items: center; 
+}
+.modal-request-card { background: white; padding: 40px; border-radius: 15px; width: 90%; max-width: 600px; position: relative; max-height: 90vh; overflow-y: auto; }
+.close-x { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 24px; font-weight: bold; color: #ccc; }
+
+.input-robust { 
+  padding: 14px !important; 
+  border: 2px solid #ddd !important; 
+  border-radius: 10px !important; 
+  width: 100%; 
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  background: #fafafa !important;
+}
+.btn-submit-request { 
+  width: 100%; background: #ffcc00; border: none; padding: 16px; margin-top: 10px; 
+  border-radius: 6px; font-weight: 800; cursor: pointer; color: #001e3e; font-size: 16px; 
+}
+.btn-expert-call { 
+  background: #ffcc00; border: 2px solid #001e3e; padding: 15px 30px; 
+  border-radius: 8px; font-weight: 900; cursor: pointer; 
+}
