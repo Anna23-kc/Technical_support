@@ -12,18 +12,20 @@
         <div class="top-yellow-line"></div>
         <div class="login-card">
             <img src="logo.png" alt="Kaeser" style="width: 200px; margin-bottom: 20px;">
+            
             <div id="login-form-div" class="login-form">
                 <input type="email" id="email" placeholder="Email professionnel">
                 <input type="password" id="pass" placeholder="Mot de passe">
                 <button onclick="handleLogin()">Se connecter</button>
-                <p class="auth-link">Première connexion ? <a href="#" onclick="toggleAuth(true)">S'inscrire</a></p>
+                <p class="auth-link" style="margin-top: 20px;">Première connexion ? <a href="#" onclick="toggleAuth(true)">S'inscrire</a></p>
             </div>
+            
             <div id="register-form-div" class="login-form" style="display:none;">
                 <input type="email" id="reg-email" placeholder="Email professionnel">
                 <input type="password" id="reg-pass" placeholder="Mot de passe">
                 <input type="password" id="reg-pass-confirm" placeholder="Confirmer le mot de passe">
                 <button onclick="handleRegister()">S'inscrire</button>
-                <p class="auth-link">Déjà un compte ? <a href="#" onclick="toggleAuth(false)">Se connecter</a></p>
+                <p class="auth-link" style="margin-top: 20px;">Déjà un compte ? <a href="#" onclick="toggleAuth(false)">Se connecter</a></p>
             </div>
         </div>
     </div>
@@ -60,13 +62,11 @@
                     <h3>GARANTIE</h3>
                     <p>Enregistrements et demandes</p>
                 </div>
-                
                 <div class="hub-card" onclick="showPiecesMenu()">
                     <img src="./img/pieces.png" style="width: 100px; margin-bottom: 20px;">
                     <h3>PIÈCES DÉTACHÉES</h3>
                     <p>Catalogues et références</p>
                 </div>
-                
                 <div class="hub-card" onclick="showFormationMenu()">
                     <i class="fa-solid fa-graduation-cap hub-icon"></i>
                     <h3>FORMATION</h3>

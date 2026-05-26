@@ -94,7 +94,37 @@ function handleLogin() {
     } else { alert("Erreur d'identifiants"); }
 }
 
-// --- UTILITAIRE CONFIGURATION DES CHAMPS FORMULAIRE ---
+function handleRegister() {
+    const email = document.getElementById('reg-email').value.toLowerCase().trim();
+    const pass = document.getElementById('reg-pass').value;
+    const passConfirm = document.getElementById('reg-pass-confirm').value;
+    
+    if(!email || !pass) {
+        alert("Veuillez remplir tous les champs.");
+        return;
+    }
+    if(pass !== passConfirm) {
+        alert("Les mots de passe ne correspondent pas.");
+        return;
+    }
+    
+    localStorage.setItem('kaeser_user_' + email, pass);
+    alert("Compte créé !");
+    toggleAuth(false);
+}
+
+// CORRIGÉ : Nettoyage et forçage de l'affichage pour éviter les conflits d'inscription
+function toggleAuth(isReg) {
+    if (isReg) {
+        document.getElementById('login-form-div').style.display = 'none';
+        document.getElementById('register-form-div').style.display = 'block';
+    } else {
+        document.getElementById('login-form-div').style.display = 'block';
+        document.getElementById('register-form-div').style.display = 'none';
+    }
+}
+
+// FONCTION UTILITAIRE POUR GERER LES CHAMPS MACHINE
 function toggleMachineFields(show) {
     const display = show ? 'block' : 'none';
     document.getElementById('req-machine').style.display = display;
@@ -207,7 +237,6 @@ function openFormFormation() {
     document.getElementById('req-service').value = "Formation";
     document.getElementById('req-service').disabled = true;
 
-    // Masque les informations de la machine
     toggleMachineFields(false);
 
     const clientFinalDiv = document.getElementById('client-final-group');
@@ -215,7 +244,6 @@ function openFormFormation() {
     if(clientFinalDiv) clientFinalDiv.style.display = 'none';
     if(adressePostaleDiv) adressePostaleDiv.style.display = 'none';
 
-    // REPARÉ : Enlève complètement l'affichage des lignes de pièces jointes pour la formation
     if(document.getElementById('file-section-1')) document.getElementById('file-section-1').style.display = 'none';
     if(document.getElementById('file-section-2')) document.getElementById('file-section-2').style.display = 'none';
     if(document.getElementById('file-section-3')) document.getElementById('file-section-3').style.display = 'none';
