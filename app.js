@@ -113,7 +113,6 @@ function handleRegister() {
     toggleAuth(false);
 }
 
-// CORRIGÉ : Nettoyage et forçage de l'affichage pour éviter les conflits d'inscription
 function toggleAuth(isReg) {
     if (isReg) {
         document.getElementById('login-form-div').style.display = 'none';
@@ -412,14 +411,25 @@ function showUserRequests() {
     mgr.innerHTML = html || "<p>Aucun historique.</p>";
 }
 
+// --- MODIFIÉ : VISIONNEUSE PDF AVEC AFFAICHAGE NATIF SUR TEL ET INTERACTIF SUR PC ---
 function openSecurePdf(fileName) {
     const fileURL = encodeURI(`pdfs/${fileName}`);
-    const modal = document.getElementById('pdf-modal');
-    const container = document.getElementById('pdf-container');
-    scrollPos = 0; 
-    container.innerHTML = `<div style="position:relative; width:85%; height:90vh; background:#1a1a1a; border-radius:12px; overflow:hidden; display:flex;"><div style="width:110px; background:#111; display:flex; flex-direction:column; gap:25px; padding:15px; justify-content:center; align-items:center; border-right:2px solid #ffcc00; z-index:10010;"><button onclick="scrollManual(0, true)" style="background:#fff; border:none; width:55px; height:55px; font-size:10px; cursor:pointer; border-radius:8px; font-weight:bold;">DEBUT</button><button onclick="scrollManual(-600)" style="background:#ffcc00; border:none; width:65px; height:65px; font-size:30px; cursor:pointer; border-radius:50%; font-weight:bold;">▲</button><button onclick="scrollManual(600)" style="background:#ffcc00; border:none; width:65px; height:65px; font-size:30px; cursor:pointer; border-radius:50%; font-weight:bold;">▼</button></div><div style="flex:1; position:relative; overflow:hidden; background:white;"><div style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:9999; background:transparent;"></div><div id="pdf-mover" style="position:absolute; top:0; left:0; width:100%; height:100%; transition: transform 0.3s ease-out;"><iframe src="${fileURL}#toolbar=0" width="100%" height="30000px" style="border:none;"></iframe></div></div></div>`;
-    container.oncontextmenu = function() { return false; };
-    modal.style.display = 'block';
+    
+    // Ajout d'une condition robuste pour détecter si on est sur smartphone ou tablette
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        // SUR TEL : On court-circuite la visionneuse et on ouvre le fichier en natif dans un nouvel onglet
+        window.open(fileURL, '_blank');
+    } else {
+        // SUR PC : On conserve l'Iframe sécurisée et les boutons jaunes monter/descendre d'origine
+        const modal = document.getElementById('pdf-modal');
+        const container = document.getElementById('pdf-container');
+        scrollPos = 0; 
+        container.innerHTML = `<div style="position:relative; width:85%; height:90vh; background:#1a1a1a; border-radius:12px; overflow:hidden; display:flex;"><div style="width:110px; background:#111; display:flex; flex-direction:column; gap:25px; padding:15px; justify-content:center; align-items:center; border-right:2px solid #ffcc00; z-index:10010;"><button onclick="scrollManual(0, true)" style="background:#fff; border:none; width:55px; height:55px; font-size:10px; cursor:pointer; border-radius:8px; font-weight:bold;">DEBUT</button><button onclick="scrollManual(-600)" style="background:#ffcc00; border:none; width:65px; height:65px; font-size:30px; cursor:pointer; border-radius:50%; font-weight:bold;">▲</button><button onclick="scrollManual(600)" style="background:#ffcc00; border:none; width:65px; height:65px; font-size:30px; cursor:pointer; border-radius:50%; font-weight:bold;">▼</button></div><div style="flex:1; position:relative; overflow:hidden; background:white;"><div style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:9999; background:transparent;"></div><div id="pdf-mover" style="position:absolute; top:0; left:0; width:100%; height:100%; transition: transform 0.3s ease-out;"><iframe src="${fileURL}#toolbar=0" width="100%" height="30000px" style="border:none;"></iframe></div></div></div>`;
+        container.oncontextmenu = function() { return false; };
+        modal.style.display = 'block';
+    }
 }
 
 function scrollManual(amount, reset = false) {

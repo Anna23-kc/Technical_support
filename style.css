@@ -129,7 +129,7 @@ body {
   display: flex; 
   justify-content: space-between; 
   align-items: center; 
-  padding: 10px 40px; 
+  padding: 25px 40px 10px 40px; 
 }
 .nav-logo-img {
   height: 85px; 
@@ -148,18 +148,29 @@ body {
 }
 .btn-nav.active { color: #001e3e; }
 
-/* --- BANDEAU HERO --- */
+/* --- BANDEAU HERO (COMPACTÉ AU MAXIMUM) --- */
 .hero { 
   background: #7f8c8d; 
-  padding: 20px; 
+  padding: 5px 20px 5px 20px; /* CORRIGÉ : Espacement interne réduit au minimum absolu */
   text-align: center; 
   color: white; 
+  overflow: hidden; 
 }
 .hero h1 { font-size: 2.5rem; margin: 0; font-weight: bold; }
-.hero-subtitle { font-style: italic; opacity: 0.9; margin-top: 5px; }
-.hero-top-icons img { width: 220px; height: auto; mix-blend-mode: lighten; }
+.hero-subtitle { font-style: italic; opacity: 0.9; margin-top: 2px; }
 
-/* --- BARRE DE RECHERCHE STRICTEMENT D'ORIGINE (PAS TOUCHÉE) --- */
+/* L'image reste géante mais ses marges sont réduites et ajustées */
+.hero-top-icons img { 
+  width: 220px; 
+  height: auto; 
+  mix-blend-mode: lighten; 
+  margin-top: 25px;    /* CORRIGÉ : Remonté au maximum */
+  margin-bottom: 5px;  /* CORRIGÉ : Supprime le vide sous l'image */
+  transform: scale(1.85); 
+  transform-origin: center;
+}
+
+/* --- BARRE DE RECHERCHE STRICTEMENT D'ORIGINE --- */
 .search-bar-modern { 
   background: white; 
   max-width: 700px; 
@@ -178,11 +189,10 @@ body {
   font-size: 15px; 
 }
 
-/* --- RETOUR PROPULSÉ SUR LA MÊME LIGNE QUE RECHERCHER (CÔTÉ DROIT) --- */
+/* --- RETOUR PROPULSÉ SUR LA MÊME LIGNE --- */
 #back-button-container {
   position: absolute;
   right: 40px;
-  /* On applique une valeur négative forte pour le forcer à remonter pile en face de la recherche */
   margin-top: -68px; 
   z-index: 999;
 }
@@ -202,7 +212,7 @@ body {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* --- GRILLE PRODUITS (FORMAT COMPACT & IMAGE GRANDIE) --- */
+/* --- GRILLE PRODUITS --- */
 .main-container { 
   padding: 15px; 
   max-width: 1400px; 
