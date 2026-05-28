@@ -108,9 +108,29 @@
                     <input type="text" id="req-adresse-postale" placeholder="ADRESSE POSTALE" class="input-robust">
                 </div>
 
-                <input type="text" id="req-machine" placeholder="MACHINE" required class="input-robust">
-                <input type="text" id="req-serie" placeholder="N° SÉRIE" required class="input-robust">
-                <input type="text" id="req-ref" placeholder="RÉFÉRENCE" required class="input-robust">
+                <div class="form-group-help">
+                    <input type="text" id="req-machine" placeholder="MACHINE" required class="input-robust">
+                    <span class="btn-help" onclick="toggleAideDrawer('machine')">❓</span>
+                    <div id="drawer-machine" class="help-drawer">
+                        <img src="./img/machine.png" alt="Aide Machine">
+                    </div>
+                </div>
+                
+                <div class="form-group-help">
+                    <input type="text" id="req-serie" placeholder="N° SÉRIE" required class="input-robust" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                    <span class="btn-help" onclick="toggleAideDrawer('serie')">❓</span>
+                    <div id="drawer-serie" class="help-drawer">
+                        <img src="./img/aide-serie.png" alt="Aide Série">
+                    </div>
+                </div>
+                
+                <div class="form-group-help">
+                    <input type="text" id="req-ref" placeholder="RÉFÉRENCE" required class="input-robust">
+                    <span class="btn-help" onclick="toggleAideDrawer('ref')">❓</span>
+                    <div id="drawer-ref" class="help-drawer">
+                        <img src="./img/aide-reference.png" alt="Aide Référence">
+                    </div>
+                </div>
                 
                 <select id="req-service" required class="input-robust">
                     <option value="Support Technique">Support Technique</option>

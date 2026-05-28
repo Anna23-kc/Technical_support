@@ -123,15 +123,17 @@ function toggleAuth(isReg) {
     }
 }
 
-// FONCTION UTILITAIRE POUR GERER LES CHAMPS MACHINE
 function toggleMachineFields(show) {
-    const display = show ? 'block' : 'none';
-    document.getElementById('req-machine').style.display = display;
-    document.getElementById('req-machine').required = show;
-    document.getElementById('req-serie').style.display = display;
-    document.getElementById('req-serie').required = show;
-    document.getElementById('req-ref').style.display = display;
-    document.getElementById('req-ref').required = show;
+    const displayValue = show ? '' : 'none';
+    
+    const blockMachine = document.getElementById('req-machine').closest('.form-group-help');
+    if(blockMachine) { blockMachine.style.display = displayValue; document.getElementById('req-machine').required = show; }
+    
+    const blockSerie = document.getElementById('req-serie').closest('.form-group-help');
+    if(blockSerie) { blockSerie.style.display = displayValue; document.getElementById('req-serie').required = show; }
+    
+    const blockRef = document.getElementById('req-ref').closest('.form-group-help');
+    if(blockRef) { blockRef.style.display = displayValue; document.getElementById('req-ref').required = show; }
 }
 
 // --- GARANTIE ---
@@ -268,7 +270,10 @@ function openRequestModal() {
     if(document.getElementById('file-section-3')) document.getElementById('file-section-3').style.display = 'none';
 }
 
-function closeRequestModal() { document.getElementById('request-modal').style.display = 'none'; }
+function closeRequestModal() { 
+    document.getElementById('request-modal').style.display = 'none'; 
+    document.querySelectorAll('.help-drawer').forEach(d => d.style.display = 'none');
+}
 
 function handleSendRequest(e) {
     e.preventDefault();
@@ -340,7 +345,7 @@ function handleSendRequest(e) {
     if (file3) { let r3 = new FileReader(); r3.onload = (e) => { d3 = e.target.result; checkDone(); }; r3.readAsDataURL(file3); }
 }
 
-// --- PANEL ADMIN ---
+// --- PANEL ADMIN (NETTOYÉ DE L'AFFICHAGE FORCE DE L'IMAGE) ---
 function showAdminPanel() {
     document.getElementById('main-hub').style.display = 'none';
     document.getElementById('support-section').style.display = 'block';
@@ -350,19 +355,28 @@ function showAdminPanel() {
     mgr.className = "liste-verticale";
     let all = JSON.parse(localStorage.getItem('kaeser_requests') || "[]");
     let html = `<h2>ADMINISTRATION - RÉPONSES</h2>`;
+    
     all.slice().reverse().forEach(r => {
-        const btn1 = r.pj1 ? `<button onclick="ouvrirPJDirect('${r.pj1}')" style="background:#28a745; color:white; border:none; padding:8px; border-radius:5px; cursor:pointer; margin-top:10px;">👁️ Fiche/PJ</button>` : "";
-        const btn2 = r.pj2 ? `<button onclick="ouvrirPJDirect('${r.pj2}')" style="background:#007bff; color:white; border:none; padding:8px; border-radius:5px; cursor:pointer; margin-top:10px; margin-left:5px;">👁️ Photo</button>` : "";
-        const btn3 = r.pj3 ? `<button onclick="ouvrirPJDirect('${r.pj3}')" style="background:#7f8c8d; color:white; border:none; padding:8px; border-radius:5px; cursor:pointer; margin-top:10px; margin-left:5px;">👁️ Backup</button>` : "";
+        // CORRIGÉ : L'aperçu forcé automatique HTML a été supprimé pour épurer l'interface admin.
+
+        const btn1 = r.pj1 ? `<button onclick="ouvrirPJDirect('${r.pj1}')" style="background:#28a745; color:white; border:none; padding:8px; border-radius:5px; cursor:pointer; margin-top:10px;">📄 Fiche/PJ</button>` : "";
+        const btn2 = r.pj2 ? `<button onclick="ouvrirPJDirect('${r.pj2}')" style="background:#007bff; color:white; border:none; padding:8px; border-radius:5px; cursor:pointer; margin-top:10px; margin-left:5px;">📷 Photo</button>` : "";
+        const btn3 = r.pj3 ? `<button onclick="ouvrirPJDirect('${r.pj3}')" style="background:#7f8c8d; color:white; border:none; padding:8px; border-radius:5px; cursor:pointer; margin-top:10px; margin-left:5px;">📦 Backup</button>` : "";
+        
         let clientInfo = r.clientFinal ? `<p><b>Client Final:</b> ${r.clientFinal}</p>` : "";
         if (r.adressePostale) clientInfo += `<p><b>Adresse Postale:</b> ${r.adressePostale}</p>`;
+        
         html += `<div class="admin-card" style="background:white; padding:15px; border-radius:8px; margin-bottom:15px; border:1px solid #ddd;">
             <b>DE: ${r.nom} [${r.service || 'Expertise'}] (${r.date})</b><br>
             ${clientInfo}
             <p><b>Machine:</b> ${r.machine}</p>
             <p><b>Message:</b> ${r.message}</p>
-            ${btn1} ${btn2} ${btn3}
-            <textarea id="reply-to-${r.id}" class="reply-area" style="width:100%; height:60px; margin-top:10px;">${r.reponse || ""}</textarea><br>
+            
+            <div style="margin-top:12px; margin-bottom:10px;">
+                ${btn1} ${btn2} ${btn3}
+            </div>
+            
+            <textarea id="reply-to-${r.id}" class="reply-area" style="width:100%; height:60px; margin-top:10px; border-radius:5px; border:1px solid #ccc; padding:5px; box-sizing:border-box;"></textarea><br>
             <button onclick="saveReply(${r.id})" class="btn-send-reply" style="background:#001e3e; color:white; border:none; padding:8px 15px; border-radius:5px; cursor:pointer; margin-top:5px;">RÉPONDRE</button>
         </div>`;
     });
@@ -383,7 +397,20 @@ function saveReply(id) {
 function ouvrirPJDirect(base64) {
     const win = window.open();
     if (win) {
-        win.document.write(`<html><head><title>Visualisation Pièce Jointe</title><style>body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #1a1a1a; } iframe { border: none; width: 100%; height: 100%; }</style></head><body><iframe src="${base64}" allowfullscreen></iframe></body></html>`);
+        win.document.write(`
+            <html>
+            <head>
+                <title>Visualisation Pièce Jointe</title>
+                <style>
+                    body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #1a1a1a; display: flex; justify-content: center; align-items: center; } 
+                    iframe, img { border: none; width: 100% !important; height: 100% !important; object-fit: contain !important; }
+                </style>
+            </head>
+            <body>
+                ${base64.startsWith('data:image') ? `<img src="${base64}">` : `<iframe src="${base64}" allowfullscreen></iframe>`}
+            </body>
+            </html>
+        `);
         win.document.close();
     } else { alert("Veuillez autoriser les fenêtres pop-up."); }
 }
@@ -411,18 +438,13 @@ function showUserRequests() {
     mgr.innerHTML = html || "<p>Aucun historique.</p>";
 }
 
-// --- MODIFIÉ : VISIONNEUSE PDF AVEC AFFAICHAGE NATIF SUR TEL ET INTERACTIF SUR PC ---
 function openSecurePdf(fileName) {
     const fileURL = encodeURI(`pdfs/${fileName}`);
-    
-    // Ajout d'une condition robuste pour détecter si on est sur smartphone ou tablette
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
     if (isMobile) {
-        // SUR TEL : On court-circuite la visionneuse et on ouvre le fichier en natif dans un nouvel onglet
         window.open(fileURL, '_blank');
     } else {
-        // SUR PC : On conserve l'Iframe sécurisée et les boutons jaunes monter/descendre d'origine
         const modal = document.getElementById('pdf-modal');
         const container = document.getElementById('pdf-container');
         scrollPos = 0; 
@@ -481,5 +503,19 @@ function showFiles(title, files, source) {
 }
 function toggleAcc(id) { const el = document.getElementById(id); if(el) el.style.display = (el.style.display === 'block') ? 'none' : 'block'; }
 function filterProducts() { let val = document.getElementById('search-input').value.toLowerCase(); document.querySelectorAll('.card-produit').forEach(c => { c.style.display = c.innerText.toLowerCase().includes(val) ? '' : 'none'; }); }
+
+// Bascule du volet d'aide tiroir sous la case concernée
+function toggleAideDrawer(idType) {
+    const drawer = document.getElementById('drawer-' + idType);
+    if (drawer) {
+        if (drawer.style.display === 'block') {
+            drawer.style.display = 'none';
+        } else {
+            document.querySelectorAll('.help-drawer').forEach(d => d.style.display = 'none');
+            drawer.style.display = 'block';
+        }
+    }
+}
+
 window.addEventListener('contextmenu', e => e.preventDefault());
 window.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key === 's') e.preventDefault(); });
